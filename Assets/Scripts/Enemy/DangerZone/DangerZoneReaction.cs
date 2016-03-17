@@ -14,9 +14,11 @@ public class DangerZoneReaction : MonoBehaviour
     {
         if (other.gameObject.name == "Hand")
         {
-            anim.SetTrigger("Boom");
+            if (!other.gameObject.GetComponent<HandReaction>().invincible)
+            {
+                anim.SetTrigger("Boom");
+            }
         }
-
-        
     }
+
 }

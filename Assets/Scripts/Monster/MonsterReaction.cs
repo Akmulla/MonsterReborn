@@ -6,6 +6,14 @@ public class MonsterReaction : MonoBehaviour
     private Animator anim;
     private VerticalMove vert;
     private float nextIncrease;
+    public BoxCollider2D helicopterCollider;
+    public BoxCollider2D helicopterTarget;
+    private float invincibleDuration = 2.0f;
+    private float invincibleEnd;
+    private bool b=true;
+    public HandReaction hand;
+    public bool invincible = false;
+
     // Use this for initialization
     void Start ()
     {
@@ -20,8 +28,23 @@ public class MonsterReaction : MonoBehaviour
         {
             vert.speed += 0.1f;
             nextIncrease = Time.time + 1f;
+
+            
+        }
+        if (b&&(helicopterCollider.IsTouching(helicopterTarget)))
+        {
+            anim.SetTrigger("EatHelicopter");
+            b = false;
         }
 
+        if (Time.time > invincibleEnd)
+        {
+            anim.SetBool("Burn", false);
+            invincible = false;
+            hand.invincible = false;
+            hand.anim.SetBool("Invincible", true);
+
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -31,19 +54,35 @@ public class MonsterReaction : MonoBehaviour
             anim.SetTrigger("Eat");
         }
 
-        if (other.gameObject.tag == "Slower")
+        if ((other.gameObject.tag == "Slower")&&(!invincible))
         {
             GetHit();
-            vert.speed -= 0.5f;
-            if (vert.speed < 0) vert.speed = 0;
+            hand.GetInvincible();
+            invincible = true;
+            hand.invincible = true;
         }
+
+        //if (other.gameObject.name == "Helicopter")
+        //{
+        //    anim.SetTrigger("EatHelicopter");
+        //}
     }
 
    
 
     public void GetHit()
     {
-
+        vert.speed -= 0.5f;
+        if (vert.speed < 0) vert.speed = 0;
         anim.SetTrigger("GetHit");
     }
+
+    public void Burn()
+    {
+        vert.speed -= 0.5f;
+        if (vert.speed < 0) vert.speed = 0;
+        anim.SetTrigger("Burn");
+        invincibleEnd = Time.time + invincibleDuration;
+    }
+
 }

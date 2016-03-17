@@ -13,7 +13,8 @@ public class DestroyOnExit : MonoBehaviour
     void Update()
     {
         if ((transform.position.x<Edges.leftEdge)||(transform.position.x>Edges.rightEdge)
-            ||(transform.position.y>Edges.topEdge)||(transform.position.y<Edges.botEdge))
+            //||(transform.position.y>Edges.topEdge)
+            ||(transform.position.y<Edges.botEdge))
         {
             pool.Deactivate(gameObject);
         }

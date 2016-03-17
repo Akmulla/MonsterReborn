@@ -19,6 +19,7 @@ public class SpawnWaves : MonoBehaviour
     
     void Start ()
     {
+
         poolManager = GameObject.Find("PoolManager").GetComponent<PoolManager>();
         citizenPool = poolManager.GetPool("citizen");
         truckPool = poolManager.GetPool("truck");
@@ -38,7 +39,7 @@ public class SpawnWaves : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(0f, 2f));
-            Vector2 spawnPosition = new Vector2(Random.Range((float)Edges.leftEdge+1.0f, (float)Edges.rightEdge-1.0f), Edges.topEdge);
+            Vector2 spawnPosition = new Vector2(Random.Range((float)Edges.leftEdge+1.0f, (float)Edges.rightEdge-1.0f), Edges.topEdge+1);
             //Instantiate(citizen, spawnPosition, Quaternion.identity);
             citizenPool.Activate(spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(citizenWaveRate);
@@ -71,7 +72,7 @@ public class SpawnWaves : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(0f, 2f));
         while (true)
         {
-            Vector2 spawnPosition = new Vector2(Random.Range((float)Edges.leftEdge, (float)Edges.rightEdge), Edges.topEdge);
+            Vector2 spawnPosition = new Vector2(Random.Range((float)Edges.leftEdge, (float)Edges.rightEdge), Edges.topEdge+1);
             //Instantiate(flameThrower, spawnPosition, Quaternion.identity);
             truckPool.Activate(spawnPosition, Quaternion.Euler(new Vector3(0f,0f,Random.Range(0f,360f))));
             yield return new WaitForSeconds(truckWaveRate);
@@ -83,7 +84,7 @@ public class SpawnWaves : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(0f, 2f));
         while (true)
         {
-            Vector2 spawnPosition = new Vector2(Random.Range((float)Edges.leftEdge, (float)Edges.rightEdge), Edges.topEdge);
+            Vector2 spawnPosition = new Vector2(Random.Range((float)Edges.leftEdge, (float)Edges.rightEdge), Edges.topEdge+1);
             //Instantiate(flameThrower, spawnPosition, Quaternion.identity);
             boxPool.Activate(spawnPosition, Quaternion.Euler(new Vector3(0f, 0f, Random.Range(0f, 360f))));
             yield return new WaitForSeconds(boxWaveRate);
@@ -95,9 +96,9 @@ public class SpawnWaves : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(0f,2f));
         while (true)
         {
-            Vector2 spawnPosition = new Vector2(Random.Range((float)Edges.leftEdge, (float)Edges.rightEdge), Edges.topEdge);
+            Vector2 spawnPosition = new Vector2(Random.Range((float)Edges.leftEdge, (float)Edges.rightEdge), Edges.topEdge+1);
             //Instantiate(flameThrower, spawnPosition, Quaternion.identity);
-            dangerZonePool.Activate(spawnPosition, Quaternion.Euler(new Vector3(0f, 0f, Random.Range(0f, 360f))));
+            dangerZonePool.Activate(spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(dangerZoneWaveRate);
         }
     }

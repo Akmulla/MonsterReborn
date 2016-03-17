@@ -114,7 +114,6 @@ public class SoldierReaction : MonoBehaviour
 
     void Shoot()
     {
-        
         //Aim();
         Quaternion rot = Quaternion.Euler(-keepRotation);
         transform.rotation *= rot;
@@ -129,7 +128,7 @@ public class SoldierReaction : MonoBehaviour
         if ((hit.collider != null) && (hit.collider.gameObject.name == "Hand"))
         {
             HandReaction hand = hit.collider.gameObject.GetComponent<HandReaction>();
-            hand.GetHit();
+            //hand.GetHit();
         }
     }
 
