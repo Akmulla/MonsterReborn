@@ -23,7 +23,6 @@ public class HandReaction : MonoBehaviour
     {
         if ((other.gameObject.CompareTag("DangerZone")) && (!invincible))
         {
-            Debug.Log(invincible);
             GetHit();
         }
     }
